@@ -1,0 +1,77 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Restorant {
+  id_restorant        Int            @id @default(autoincrement())
+  manager_restorant   String         @db.VarChar(80)
+  city                String         @db.VarChar(100)
+  address             String         @db.Text
+  telephone_restorant String         @db.VarChar(12)
+  email_restorant     String         @db.VarChar(100)
+  branch              String         @unique @db.VarChar(100)
+  Meals               Meals[]
+  Chefs               Chefs[]
+  Testimonials        Testimonials[]
+  Contacts            Contacts[]
+}
+
+model Meals {
+  id_meal         Int        @id @default(autoincrement())
+  name_meal       String     @db.VarChar(80)
+  description     String     @db.Text
+  Price           Float
+  Image           String     @db.Text
+  restorant       Restorant  @relation(fields: [id_restorant_fk], references: [id_restorant])
+  category        Categories @relation(fields: [id_category_fk], references: [id_category])
+  id_restorant_fk Int
+  id_category_fk  Int
+}
+
+model Categories {
+  id_category   Int    @id @default(autoincrement())
+  type_category String @unique @db.VarChar(20)
+
+  Meals Meals[]
+}
+
+model Chefs {
+  id_chef         Int          @id @default(autoincrement())
+  name_chef       String       @db.VarChar(80)
+  designation     String       @db.Text
+  image           String       @db.Text
+  restorant       Restorant    @relation(fields: [id_restorant_fk], references: [id_restorant])
+  id_restorant_fk Int
+  SocialsNet      SocialsNet[]
+}
+
+model SocialsNet {
+  id_social  Int    @id @default(autoincrement())
+  facebook   String @db.Text
+  twitter    String @db.Text
+  instagram  String @db.Text
+  chef       Chefs  @relation(fields: [id_chef_fk], references: [id_chef])
+  id_chef_fk Int
+}
+
+model Testimonials {
+  id_testimonial  Int       @id @default(autoincrement())
+  profession      String    @db.VarChar(80)
+  message         String    @db.Text
+  restorant       Restorant @relation(fields: [id_restorant_fk], references: [id_restorant])
+  id_restorant_fk Int
+}
+
+model Contacts {
+  id_contact      Int       @id @default(autoincrement())
+  name            String    @db.VarChar(80)
+  subject         String    @db.VarChar(120)
+  message         String    @db.Text
+  restorant       Restorant @relation(fields: [id_restorant_fk], references: [id_restorant])
+  id_restorant_fk Int
+}

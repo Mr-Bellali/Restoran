@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords"
+        content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, Matrix lite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, Matrix admin lite design, Matrix admin lite dashboard bootstrap 5 dashboard template">
+    <meta name="description"
+        content="Matrix Admin Lite Free Version is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Matrix Admin Lite Free Versions Template by WrapPixel</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon.png">
+    <!-- Custom CSS -->
+    <link href="/assets/libs/flot/css/float-chart.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/dist/css/style.min.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+
+<body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
+        data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+        <%- include('./include/header.ejs') %>
+        <%- include('./include/sidebar.ejs') %>
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+<div class="container-fluid">          
+<div class="card">
+    <form class="form-horizontal" id="Restorant-form">
+        <div class="card-body">
+            <h4 class="card-title">add Restorant</h4>
+            <div class="form-group row">
+                <label for="manager"
+                    class="col-sm-3 text-end control-label col-form-label">Manager</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="manager" name="manager"
+                        placeholder="Manager's Name Here">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="lname" class="col-sm-3 text-end control-label col-form-label">City</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="city" name="city"
+                        placeholder="Restorant' city Here">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="cono1"
+                    class="col-sm-3 text-end control-label col-form-label">Adress</label>
+                <div class="col-sm-9">
+                    <textarea class="form-control" id="adress" name="adress"></textarea>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="lname" class="col-sm-3 text-end control-label col-form-label">Phone number</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="phone" name="phone"
+                        placeholder="Restorant's phonenumber Here">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="lname" class="col-sm-3 text-end control-label col-form-label">Email</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="email" name="email"
+                        placeholder="Restorant's email Here">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="lname" class="col-sm-3 text-end control-label col-form-label">Branch</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="branch" name="branch"
+                        placeholder="Restorant's branch Here">
+                </div>
+            </div>
+
+        </div>
+        
+        <div class="border-top">
+            <div class="card-body">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Restorants</h5>
+        <div class="table-responsive">
+            <table id="zero_config" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Manager</th>
+                        <th>City</th>
+                        <th>Adress</th>
+                        <th>Phonenumber</th>
+                        <th>Email</th>
+                        <th>Branch</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <% restorants.forEach(function(restorant){ %>
+                    <tr>
+                        <td><%= restorant.manager_restorant %></td>
+                        <td><%= restorant.city %></td>
+                        <td><%= restorant.address %></td>
+                        <td><%= restorant.telephone_restorant %></td>
+                        <td><%= restorant.email_restorant %></td>
+                        <td><%= restorant.branch %></td>
+                    </tr>
+                    <% }); %>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+</div> 
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="/assets/libs/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="/assets/extra-libs/sparkline/sparkline.js"></script>
+    <!--Wave Effects -->
+    <script src="/dist/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="/dist/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="/dist/js/custom.min.js"></script>
+    <!--This page JavaScript -->
+    <!-- <script src="/dist/js/pages/dashboards/dashboard1.js"></script> -->
+    <!-- Charts js Files -->
+    <script src="/assets/libs/flot/excanvas.js"></script>
+    <script src="/assets/libs/flot/jquery.flot.js"></script>
+    <script src="/assets/libs/flot/jquery.flot.pie.js"></script>
+    <script src="/assets/libs/flot/jquery.flot.time.js"></script>
+    <script src="/assets/libs/flot/jquery.flot.stack.js"></script>
+    <script src="/assets/libs/flot/jquery.flot.crosshair.js"></script>
+    <script src="/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+    <script src="/dist/js/pages/chart/chart-page-init.js"></script>
+    <script>
+        document.getElementById('Restorant-form').addEventListener('submit', async (event) =>{
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const manager = formData.get('manager');
+            const city = formData.get('city');
+            const adress = formData.get('adress');
+            const phonenumber = formData.get('phone');
+            const email = formData.get('email');
+            const branch = formData.get('branch');
+
+            try {
+                const response = await fetch('/dashboard/restorant',{
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json', 
+                    },
+                    body: JSON.stringify({
+                        manager,
+                        city,
+                        adress,
+                        phonenumber,
+                        email,
+                        branch
+                    }),
+                });
+                if (response.ok) {
+                    alert('Restorant created seccessfully!');
+                }else {
+                    alert('Failed to create restorant')
+                }
+            } catch (error) {
+               console.log('Error:', error);
+               alert('Failed to create restorant'); 
+            }
+        });
+    </script>
+</body>
+
+</html>
+
+
