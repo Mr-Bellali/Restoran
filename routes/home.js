@@ -1,11 +1,14 @@
 import { Router } from "express";
-import { getAllCategories } from "../controllers/home.js";
+import { getAllCategories, getAllChefs, getAlltestimonials, getAllRestorants } from "../controllers/home.js";
 
 const homeRouter = Router() ;
 
 homeRouter.get("/",async (req, res) => {
     const categories = await getAllCategories();
-    res.render("index", {categories});
+    const chefs = await getAllChefs();
+    const testimonials = await getAlltestimonials();
+    const restorants = await getAllRestorants()
+    res.render("index", {categories, chefs, testimonials, restorants });
 })
 
 

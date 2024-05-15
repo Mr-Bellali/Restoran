@@ -41,12 +41,54 @@ export const getAllCategories = async () => {
                 }
             }
         });
-        categories.forEach(function (category) {
-            console.log(category.Meals)
-        })
         return categories;
     } catch (error) {
         console.log(error);
     }
 }
 
+//get chefs 
+
+export const getAllChefs = async () => {
+    try {
+        const chefs = prisma.chefs.findMany({
+            include: {
+                SocialsNet:{
+                    select: {
+                        facebook: true,
+                        twitter: true,
+                        instagram: true
+                    }
+                }
+            }
+        });
+        console.log(chefs);
+        return chefs;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// get testimonials
+
+export const getAlltestimonials = async () => {
+    try {
+        const testimonials = prisma.testimonials.findMany();
+        console.log(testimonials);
+        return testimonials;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// get restorants
+
+export const getAllRestorants = async () => {
+    try {
+        const restorants = await prisma.restorant.findMany();
+        console.log(restorants);
+        return restorants;
+    } catch (error) {
+        console.log(error);
+    }
+}

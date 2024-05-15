@@ -154,6 +154,7 @@ export const getAllMeals = async () => {
         meals.forEach(meal => {
             console.log(meal.restorant);
             console.log(meal.category);
+            console.log(meal.Image);
         });
         return meals;
     } catch (error) {
