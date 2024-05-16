@@ -19,6 +19,7 @@ model Restorant {
   Chefs               Chefs[]
   Testimonials        Testimonials[]
   Contacts            Contacts[]
+  Reservations        Reservations[]
 }
 
 model Meals {
@@ -72,6 +73,18 @@ model Contacts {
   name            String    @db.VarChar(80)
   subject         String    @db.VarChar(120)
   message         String    @db.Text
+  email           String    @db.Text
   restorant       Restorant @relation(fields: [id_restorant_fk], references: [id_restorant])
   id_restorant_fk Int
+}
+
+model Reservations {
+  id_reservation   Int       @id @default(autoincrement())
+  name             String    @db.VarChar(80)
+  email            String    @db.VarChar(100)
+  date_reservation DateTime
+  number_of_poeple Int
+  special_request  String    @db.Text
+  id_restorant_fk  Int
+  restorant        Restorant @relation(fields: [id_restorant_fk], references: [id_restorant])
 }

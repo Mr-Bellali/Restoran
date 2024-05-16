@@ -1,29 +1,67 @@
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
+
 //get branches
-export const getBranchDerection = async (req, res) => {
+
+export const getBranchDirection = async (req, res) => {
     try {
         const branch = req.params.branch;
+        if (!branch) {
+            return res.status(404).json({ error: 'Branch not found' });
+        }
+        
         const branchData = await prisma.restorant.findUnique({
             where: {
                 branch
             },
             include: {
                 Chefs: true,
-                Meals: true,
-                Categories: true
+                Meals: {
+                    include: {
+                        category: true
+                    }
+                },
+                Testimonials: true,
+                Contacts: true,
+                Reservations: true
             }
         });
-        if(!branch) {
-            return res.status(404).json({ error: 'Branch not found'});
+
+        if (!branchData) {
+            return res.status(404).json({ error: 'Branch not found' });
         }
-        res.render('index', { branchData })
+
+        // Fetch additional data specifically for the branch
+        const categories = await prisma.categories.findMany({
+            where: {
+                Meals: {
+                    some: {
+                        id_restorant_fk: branchData.id_restorant
+                    }
+                }
+            }
+        });
+
+        const chefs = await prisma.chefs.findMany({
+            where: {
+                id_restorant_fk: branchData.id_restorant
+            }
+        });
+
+        const testimonials = await prisma.testimonials.findMany({
+            where: {
+                id_restorant_fk: branchData.id_restorant
+            }
+        });
+
+        res.render('branch', { branchData, categories, chefs, testimonials });
     } catch (error) {
         console.error('Error fetching branch data:', error);
         res.status(500).json({ error: 'Failed to fetch branch data' });
     }
 }
+
 
 // get categories 
 
