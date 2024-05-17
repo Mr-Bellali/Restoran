@@ -138,18 +138,10 @@ export const createMeal = async (req, res) => {
 export const getAllMeals = async () => {
     try {
         const meals = await prisma.meals.findMany({
-            include:{
-                restorant: {
-                    select: {
-                        branch: true
-                    }
-                },
-                category: {
-                    select: {
-                        type_category:true
-                    }
-                }
-            }
+            include: {
+                restorant: true,
+                category:  true
+               }
         });
         meals.forEach(meal => {
             console.log(meal.restorant);
@@ -159,5 +151,38 @@ export const getAllMeals = async () => {
         return meals;
     } catch (error) {
         console.log(error)
+    }
+}
+
+//reservation controllers
+//GET
+export const getAllReservation = async () => {
+    try {
+        const reservations = await prisma.reservations.findMany({
+            include: {
+                restorant: true
+            }
+        });
+        console.log(reservations);
+        return reservations;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+//contact controllers
+
+export const getAllContacts = async () => {
+    try {
+        const contacts = await prisma.contacts.findMany({
+            include:{
+                restorant:true
+            }
+        });
+        console.log(contacts);
+        return contacts;
+    } catch (error) {
+        console.log(error);
     }
 }

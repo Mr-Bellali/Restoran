@@ -6,24 +6,39 @@
         </div>
         <div class="row g-4">
             
-            <% chefs.forEach(function(chef){ %>
+            <!-- team.ejs -->
+
+<% if (chefs && chefs.length > 0) { %>
+    <div class="row">
+        <% chefs.forEach(function(chef){ %>
             <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                 <div class="team-item text-center rounded overflow-hidden">
                     <div class="rounded-circle overflow-hidden m-4">
-                        <img class="img-fluid" src="<%= chef.image.replace('./public/','') %>" alt="image">
+                        <img class="img-fluid" src="<%= chef.image.replace('./public','') %>" alt="Chef Image">
                     </div>
                     <h5 class="mb-0"><%= chef.name_chef %></h5>
                     <small><%= chef.designation %></small>
-                    <% chef.SocialsNet.forEach(function(SocialNet){ %>
                     <div class="d-flex justify-content-center mt-3">
-                        <a class="btn btn-square btn-primary mx-1" href="<% SocialNet.facebook %>"><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-square btn-primary mx-1" href="<% SocialNet.twitter %>"><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-square btn-primary mx-1" href="<% SocialNet.instagram %>"><i class="fab fa-instagram"></i></a>
+                        <% chef.SocialsNet.forEach(function(socialNet){ %>
+                            <a class="btn btn-square btn-primary mx-1" href="<%= socialNet.facebook %>">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a class="btn btn-square btn-primary mx-1" href="<%= socialNet.twitter %>">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a class="btn btn-square btn-primary mx-1" href="<%= socialNet.instagram %>">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        <% }); %>
                     </div>
-                    <% }); %>
                 </div>
             </div>
-            <% }); %>
+        <% }); %>
+    </div>
+<% } else { %>
+    <p>No chefs available.</p>
+<% } %>
+
         </div>
     </div>
 </div>

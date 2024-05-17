@@ -1,13 +1,12 @@
 import { Router } from "express";
 import { createContact } from "../controllers/contact.js";
 
+const contactRouter = Router();
 
-const contactRouter = Router() ;
-
-contactRouter.get("/contact",(req, res) => {
-    res.render("contact");
+contactRouter.get("/:branch/contact", (req, res) => {
+    res.render("contact", { branch: req.params.branch });
 });
 
-contactRouter.post("/contact", createContact);
+contactRouter.post("/:branch/contact", createContact);
 
 export default contactRouter;

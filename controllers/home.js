@@ -4,6 +4,7 @@ const prisma = new PrismaClient()
 
 //get branches
 
+
 export const getBranchDirection = async (req, res) => {
     try {
         const branch = req.params.branch;
@@ -16,7 +17,11 @@ export const getBranchDirection = async (req, res) => {
                 branch
             },
             include: {
-                Chefs: true,
+                Chefs: {
+                    include: {
+                        SocialsNet: true
+                    }
+                },
                 Meals: {
                     include: {
                         category: true
@@ -32,7 +37,6 @@ export const getBranchDirection = async (req, res) => {
             return res.status(404).json({ error: 'Branch not found' });
         }
 
-        // Fetch additional data specifically for the branch
         const categories = await prisma.categories.findMany({
             where: {
                 Meals: {
@@ -55,7 +59,7 @@ export const getBranchDirection = async (req, res) => {
             }
         });
 
-        res.render('branch', { branchData, categories, chefs, testimonials });
+        res.render('index', { branchData, categories, chefs, testimonials });
     } catch (error) {
         console.error('Error fetching branch data:', error);
         res.status(500).json({ error: 'Failed to fetch branch data' });
@@ -128,5 +132,47 @@ export const getAllRestorants = async () => {
         return restorants;
     } catch (error) {
         console.log(error);
+    }
+}
+
+//post reservation 
+
+export const creatReservation = async (req, res) => {
+    const branch = req.params.branch; 
+    const { name, email, dateReservation, numberOfPeople, specialRequest } = req.body;
+
+    try {
+        const branchData = await prisma.restorant.findUnique({
+            where: {
+                branch: branch
+            }
+        });
+
+        if (!branchData) {
+            return res.status(404).json({ error: 'Branch not found' });
+        }
+
+        const isoDateReservation = new Date(dateReservation).toISOString();
+
+        const reservation = await prisma.reservations.create({
+            data: {
+                name,
+                email,
+                date_reservation: isoDateReservation,
+                number_of_poeple: +numberOfPeople,
+                special_request: specialRequest,
+                restorant: {
+                    connect: {
+                        id_restorant: branchData.id_restorant 
+                    }
+                }
+            }
+        });
+
+        console.log(reservation);
+        res.redirect(`/${branchData.branch}`);
+    } catch (error) {
+        console.error('Error creating reservation:', error);
+        res.status(500).json({ error: 'Failed to create reservation' });
     }
 }

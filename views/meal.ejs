@@ -140,21 +140,10 @@
                         <tr>
                             <td><%= meal.name_meal %></td>
                             <td><%= meal.description %></td>
-                            <td><%= meal.price %></td>
-                            <% if (Array.isArray(meal.restorant)) { %>
-                                <% meal.restorant.forEach(function(restr){ %>
-                                    <td><%= restr.branch %></td>
-                                <% }); %>
-                            <% } else { %>
-                                <td colspan="3">No branch available</td>
-                            <% } %>
-                            <% if (Array.isArray(meal.category)) { %>
-                                <% meal.category.forEach(function(ctgr){ %>
-                                    <td><%= ctgr.type_category %></td>
-                                <% }); %>
-                            <% } else { %>
-                                <td colspan="3">No category available</td>
-                            <% } %>
+                            <td><%= meal.Price %></td>
+                            <td><%= meal.category.type_category %></td>
+                            <td><%= meal.restorant.branch%></td>
+                            
                         </tr>
                     <% }); %>
                     

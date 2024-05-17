@@ -26,21 +26,15 @@
     <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
 </head>
 
 <body>
     <div class="container-xxl bg-white p-0">
-        <!-- Spinner Start -->
-        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
-        <!-- Spinner End -->
+        
 
 
         <!-- Navbar & Hero Start -->
@@ -56,9 +50,9 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <div class="navbar-nav ms-auto py-0 pe-4">
-                            <a href="index.html" class="nav-item nav-link">Home</a>
-                            <a href="about.html" class="nav-item nav-link">About</a>
-                            <a href="contact.html" class="nav-item nav-link active">Contact</a>
+                            <a href="/<%= branch %>" class="nav-item nav-link">Home</a>
+                            <a href="/<%= branch %>/about" class="nav-item nav-link ">About</a>
+                            <a href="/<%= branch %>/contact" class="nav-item nav-link active">Contact</a>
                         </div>
                         <a href="" class="btn btn-primary py-2 px-4">Book A Table</a>
                 </div>
@@ -114,7 +108,7 @@
                     <div class="col-md-6">
                         <div class="wow fadeInUp" data-wow-delay="0.2s">
                             <form action="contact" method="post">
-                                <input type="hidden" name="restorantId" value="1">
+                                <input type="hidden" name="restorantId" value="<%= branch.id_restorant %>">
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <div class="form-floating">

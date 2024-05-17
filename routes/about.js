@@ -1,13 +1,7 @@
 import { Router } from "express";
-import { getAllRestorants, getAllChefs } from "../controllers/home.js";
+import {getAboutInfo} from '../controllers/about.js'
+const aboutRouter = Router();
 
-const aboutRouter = Router() ;
+aboutRouter.get("/:branch/about", getAboutInfo);
 
-
-aboutRouter.get("/about",async (req, res) => {
-    const chefs = await getAllChefs();
-    const restorants = await getAllRestorants();
-    res.render("about", {chefs, restorants});
-})
-
-export default aboutRouter ;
+export default aboutRouter;
